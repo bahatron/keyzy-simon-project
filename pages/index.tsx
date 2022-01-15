@@ -16,15 +16,15 @@ const Home: NextPage = () => {
             </Head>
 
             <main className={styles.main}>
-                <h1 className={styles.title}>
+                <h1 className={`${styles.title}`}>
                     Welcome to <a href="https://nextjs.org">Next.js!</a>
                 </h1>
 
-                <h1 className="text-3xl font-bold underline">
+                <h1 className={"text-3xl font-bold bg-honey"}>
                     Hello from Tailwind!
                 </h1>
 
-                <div className={styles.grid}>
+                <div className={`${styles.grid} bg-navy`}>
                     <a href="https://nextjs.org/docs" className={styles.card}>
                         <h2>Documentation &rarr;</h2>
                         <p>
