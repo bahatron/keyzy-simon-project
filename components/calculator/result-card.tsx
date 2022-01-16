@@ -1,26 +1,7 @@
 import React from "react";
 import Card from "@material-ui/core/Card";
-import { CardContent } from "@material-ui/core";
-
-function ResultModel(params: {
-    maximum_budget: string;
-    monthly_cost: string;
-    product_fee: string;
-    projected_value: string;
-    total_converted_rent: string;
-    total_payment_end_contract: string;
-}) {
-    return params;
-}
-
-export const data = ResultModel({
-    maximum_budget: "string",
-    monthly_cost: "string",
-    product_fee: "string",
-    projected_value: "string",
-    total_converted_rent: "string",
-    total_payment_end_contract: "string",
-});
+import { Button, CardContent } from "@material-ui/core";
+import { calculatorStore } from "../../state/calculator";
 
 const displayName = {
     maximum_budget: "Maximum Budget",
@@ -32,6 +13,14 @@ const displayName = {
 };
 
 export default () => {
+    const { data, update } = calculatorStore();
+
+    function changeStuff(e: any) {
+        console.log({ e });
+
+        update({ maximum_budget: "harro" });
+    }
+
     return (
         <Card>
             <CardContent>
@@ -60,6 +49,8 @@ export default () => {
                         )
                     )}
                 </div>
+
+                <Button onClick={(e) => changeStuff(e)}>click me</Button>
             </CardContent>
         </Card>
     );

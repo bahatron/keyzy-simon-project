@@ -78,6 +78,15 @@ export default () => {
                                 </MenuItem>
                             ))}
                         </TextField>
+
+                        <TextField
+                            id="standard-multiline-flexible"
+                            label="Income"
+                            variant="outlined"
+                            multiline
+                            maxRows={4}
+                            value={form.income}
+                        />
                     </div>
                 </CardContent>
             </CardActionArea>
