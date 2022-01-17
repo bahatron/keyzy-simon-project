@@ -1,17 +1,9 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import {
-    Slider,
-    Button,
-    TextField,
-    ButtonGroup,
-    MenuItem,
-    Typography,
-} from "@material-ui/core";
+import { Slider, Button, TextField, Typography } from "@material-ui/core";
 import { calculatorStore } from "../../state/calculator";
 
 const useStyles = makeStyles({
@@ -35,14 +27,6 @@ export default () => {
 
     const _calculator = calculatorStore();
 
-    let _location = {
-        get: function () {
-            return _calculator.result.location;
-        },
-        set: function (value: any) {
-            _calculator.updateLocation(value);
-        },
-    };
     return (
         <Card className={`${classes.root} pa-4`}>
             <CardContent>
@@ -81,13 +65,28 @@ export default () => {
                             step={2}
                         />
                     </div>
+
+                    <div className="mt-4">
+                        <Typography gutterBottom>
+                            Assumed Property Price Growth
+                        </Typography>
+
+                        <Slider
+                            defaultValue={3.5}
+                            onChange={(e: any, val: any) =>
+                                _calculator.updatePercentageGrowth(val)
+                            }
+                            min={0}
+                            max={7}
+                            step={0.1}
+                        />
+
+                        <p className="text-center">
+                            {`${_calculator.input.percentage_growth}%`}
+                        </p>
+                    </div>
                 </div>
             </CardContent>
-            <CardActions>
-                <Button size="small" color="primary">
-                    Learn More
-                </Button>
-            </CardActions>
         </Card>
     );
 };
