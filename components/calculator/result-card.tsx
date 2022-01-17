@@ -13,7 +13,7 @@ const displayName = {
 };
 
 export default () => {
-    const { data, update } = calculatorStore();
+    const { result, update } = calculatorStore();
 
     function changeStuff(e: any) {
         console.log({ e });
@@ -43,7 +43,7 @@ export default () => {
                                 </div>
 
                                 <div className="text-right">
-                                    <span>{(data as any)[key]}</span>
+                                    <span>{(result as any)[key]}</span>
                                 </div>
                             </div>
                         )

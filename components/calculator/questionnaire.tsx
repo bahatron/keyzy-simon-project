@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 function FormModel(params: {
     location: string;
     income: string;
-    duration: number;
+    contract_term: number;
 }) {
     return params;
 }
@@ -32,11 +32,11 @@ function FormModel(params: {
 let form = FormModel({
     location: "",
     income: "",
-    duration: 5,
+    contract_term: 5,
 });
 
 function updateDuration(number: number) {
-    form.duration = number;
+    form.contract_term = number;
 }
 
 export default () => {
@@ -51,7 +51,6 @@ export default () => {
                             id="standard-multiline-flexible"
                             label="Location"
                             variant="outlined"
-                            multiline
                             maxRows={4}
                             value={form.location}
                         />
@@ -60,7 +59,6 @@ export default () => {
                             id="standard-multiline-flexible"
                             label="Income"
                             variant="outlined"
-                            multiline
                             maxRows={4}
                             value={form.income}
                         />
@@ -70,7 +68,7 @@ export default () => {
                             select
                             className="mt-4"
                             label="Number of Years for Contract"
-                            value={form.duration}
+                            value={form.contract_term}
                         >
                             {[3, 5, 7].map((value, i) => (
                                 <MenuItem key={i} value={value}>
@@ -83,7 +81,6 @@ export default () => {
                             id="standard-multiline-flexible"
                             label="Income"
                             variant="outlined"
-                            multiline
                             maxRows={4}
                             value={form.income}
                         />
