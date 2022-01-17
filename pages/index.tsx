@@ -7,12 +7,24 @@ import ResultCard from "../components/calculator/result-card";
 
 const Home: NextPage = () => {
     return (
-        <div className="grid grid-cols-2 bg-parchment">
-            <div className="p-2">
-                <Calculator />
-            </div>
-            <div className="p-2">
-                <ResultCard />
+        <div>
+            <Head>
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" />
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;500&display=swap"
+                    rel="stylesheet"
+                />
+            </Head>
+
+            {/* page layout */}
+            <div className="grid grid-cols-2 bg-parchment">
+                <div className="p-2">
+                    <Calculator />
+                </div>
+                <div className="p-2">
+                    <ResultCard />
+                </div>
             </div>
         </div>
     );
