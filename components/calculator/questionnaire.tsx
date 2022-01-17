@@ -10,7 +10,9 @@ import {
     TextField,
     ButtonGroup,
     MenuItem,
+    Typography,
 } from "@material-ui/core";
+import { calculatorStore } from "../../state/calculator";
 
 const useStyles = makeStyles({
     root: {
@@ -21,76 +23,56 @@ const useStyles = makeStyles({
     },
 });
 
-function FormModel(params: {
-    location: string;
-    income: string;
-    contract_term: number;
-}) {
-    return params;
-}
-
-let form = FormModel({
-    location: "",
-    income: "",
-    contract_term: 5,
-});
-
-function updateDuration(number: number) {
-    form.contract_term = number;
+function sliderMark(number: number) {
+    return {
+        value: number,
+        label: number,
+    };
 }
 
 export default () => {
     const classes = useStyles();
 
+    const _calculator = calculatorStore();
+
+    let income = "";
+
     return (
-        <Card className={`${classes.root} pa-4 min-w-max`}>
+        <Card className={`${classes.root} pa-4`}>
             <CardActionArea>
                 <CardContent>
                     <div className="grid grid-rows-4 ">
                         <TextField
-                            id="standard-multiline-flexible"
                             label="Location"
                             variant="outlined"
                             maxRows={4}
-                            value={form.location}
+                            value={_calculator.input.location}
                         />
 
                         <TextField
-                            id="standard-multiline-flexible"
                             label="Income"
                             variant="outlined"
-                            maxRows={4}
-                            value={form.income}
+                            value={income}
                         />
 
-                        <TextField
-                            id="standard-select-currency"
-                            select
-                            className="mt-4"
-                            label="Number of Years for Contract"
-                            value={form.contract_term}
-                        >
-                            {[3, 5, 7].map((value, i) => (
-                                <MenuItem key={i} value={value}>
-                                    {value}
-                                </MenuItem>
-                            ))}
-                        </TextField>
+                        <div>
+                            <Typography id="slider" gutterBottom>
+                                Number of Years for Contract
+                            </Typography>
 
-                        <TextField
-                            id="standard-multiline-flexible"
-                            label="Income"
-                            variant="outlined"
-                            maxRows={4}
-                            value={form.income}
-                        />
+                            <Slider
+                                defaultValue={5}
+                                id="slider"
+                                marks={[3, 5, 7].map(sliderMark)}
+                                min={3}
+                                max={7}
+                                step={2}
+                            />
+                        </div>
                     </div>
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                <Button size="small" color="primary">
-                    Share
-                </Button>
                 <Button size="small" color="primary">
                     Learn More
                 </Button>
