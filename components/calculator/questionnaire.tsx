@@ -35,43 +35,54 @@ export default () => {
 
     const _calculator = calculatorStore();
 
-    let income = "";
-
+    let _location = {
+        get: function () {
+            return _calculator.result.location;
+        },
+        set: function (value: any) {
+            _calculator.updateLocation(value);
+        },
+    };
     return (
         <Card className={`${classes.root} pa-4`}>
-            <CardActionArea>
-                <CardContent>
-                    <div className="grid grid-rows-4 ">
-                        <TextField
-                            label="Location"
-                            variant="outlined"
-                            maxRows={4}
-                            value={_calculator.input.location}
+            <CardContent>
+                <div className="grid grid-rows-4 ">
+                    <TextField
+                        label="Location"
+                        variant="outlined"
+                        value={_calculator.result.location}
+                        onChange={(e) => {
+                            _calculator.updateLocation(e.target.value);
+                        }}
+                    />
+
+                    <TextField
+                        label="Income"
+                        variant="outlined"
+                        value={_calculator.input.income}
+                        onChange={(e) =>
+                            _calculator.updateIncome(e.target.value)
+                        }
+                    />
+
+                    <div>
+                        <Typography gutterBottom>
+                            Number of Years for Contract
+                        </Typography>
+
+                        <Slider
+                            defaultValue={5}
+                            onChange={(e: any, val: any) =>
+                                _calculator.updateContractTerm(val)
+                            }
+                            marks={[3, 5, 7].map(sliderMark)}
+                            min={3}
+                            max={7}
+                            step={2}
                         />
-
-                        <TextField
-                            label="Income"
-                            variant="outlined"
-                            value={income}
-                        />
-
-                        <div>
-                            <Typography id="slider" gutterBottom>
-                                Number of Years for Contract
-                            </Typography>
-
-                            <Slider
-                                defaultValue={5}
-                                id="slider"
-                                marks={[3, 5, 7].map(sliderMark)}
-                                min={3}
-                                max={7}
-                                step={2}
-                            />
-                        </div>
                     </div>
-                </CardContent>
-            </CardActionArea>
+                </div>
+            </CardContent>
             <CardActions>
                 <Button size="small" color="primary">
                     Learn More

@@ -4,22 +4,17 @@ import { Button, CardContent } from "@material-ui/core";
 import { calculatorStore } from "../../state/calculator";
 
 const displayName = {
+    location: "Selected Location",
+    product_fee: "Product Fee",
     maximum_budget: "Maximum Budget",
     monthly_cost: "Monthly Cost",
-    product_fee: "Product Fee",
     projected_value: "Project Value",
     total_converted_rent: "Total Invested from Rent",
     total_payment_end_contract: "Total Payment over Contract",
 };
 
 export default () => {
-    const { result, update } = calculatorStore();
-
-    function changeStuff(e: any) {
-        console.log({ e });
-
-        update({ maximum_budget: "harro" });
-    }
+    const { result } = calculatorStore();
 
     return (
         <Card>
@@ -49,8 +44,6 @@ export default () => {
                         )
                     )}
                 </div>
-
-                <Button onClick={(e) => changeStuff(e)}>click me</Button>
             </CardContent>
         </Card>
     );

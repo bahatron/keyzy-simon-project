@@ -18,11 +18,15 @@ function calculateTotalConvertedRent({
     monthly_cost: string;
     contract_term: string;
 }) {
+    console.log({
+        monthly_cost,
+        contract_term,
+    });
     return (
         (
             0.25 *
             parseFloat(monthly_cost) *
-            parseFloat(contract_term) *
+            parseFloat(contract_term ?? "5") *
             12
         ).toFixed(2) ?? "N/A"
     );
@@ -30,32 +34,23 @@ function calculateTotalConvertedRent({
 
 export const calculatorStore = create((set: any) => ({
     result: {
-        maximum_budget: "string",
-        monthly_cost: "string",
+        maximum_budget: "",
+        monthly_cost: "",
         product_fee: "£2990",
-        projected_value: "string",
-        total_converted_rent: "string",
-        total_payment_end_contract: "string",
+        projected_value: "",
+        total_converted_rent: "",
+        total_payment_end_contract: "",
+        location: "NW3",
     },
 
     input: {
-        contract_term: 5,
-        location: "",
+        contract_term: "5",
         income: "",
-    },
-
-    update: (data: any) => {
-        return set((state: any) => {
-            state.data = {
-                ...state.data,
-                ...data,
-            };
-        });
     },
 
     updateLocation: (location: string) => {
         return set((state: any) => {
-            state.input.location = location;
+            state.result.location = location;
         });
     },
 
@@ -63,8 +58,10 @@ export const calculatorStore = create((set: any) => ({
         return set((state: any) => {
             state.input.contract_term = years;
 
-            state.result.total_converted_rent =
-                calculateTotalConvertedRent(state);
+            state.result.total_converted_rent = calculateTotalConvertedRent({
+                monthly_cost: state.result.monthly_cost,
+                contract_term: years,
+            });
         });
     },
 
@@ -77,8 +74,10 @@ export const calculatorStore = create((set: any) => ({
                 ((state.result.maximum_budget / 12) * 0.045).toFixed(2) ??
                 "N/A";
 
-            state.result.total_converted_rent =
-                calculateTotalConvertedRent(state);
+            state.result.total_converted_rent = calculateTotalConvertedRent({
+                monthly_cost: state.result.monthly_cost,
+                contract_term: state.input.monthly_cost,
+            });
         });
     },
 }));
